@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: raw 
+    schema: gz_raw_data
+    description: raw tables
+    tables:
+        - name: sales
+          identifier: raw_gz_sales_copy
+          description: sales data for greenweez app 
+          columns:
+            - name: orders_id
+              description: unique id of the order
+              tests:
+                - unique:
+                    arguments:
+                      column_name: "orders_id || '-' || pdt_id"
+                - not_null 
+        - name: product        
+          identifier: raw_gz_products_copy
+          description: products data for greenweez app 
+          columns:
+             - name: products_id
+               description: unique id of the products 
+               tests:
+                  - unique
+                  - not_null
