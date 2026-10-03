@@ -4,7 +4,7 @@ sources:
   - name: raw 
     schema: gz_raw_data
     description: raw tables
-    tables:
+    tables: 
         - name: sales
           identifier: raw_gz_sales_copy
           description: sales data for greenweez app 
