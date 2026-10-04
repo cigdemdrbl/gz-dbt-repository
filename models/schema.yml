@@ -1,37 +1,44 @@
 version: 2
 
 sources:
-  - name: raw 
+  - name: raw
     schema: gz_raw_data
     description: raw tables
-    tables: 
-        - name: sales
-          identifier: raw_gz_sales_copy
-          description: sales data for greenweez app 
-          columns:
-            - name: orders_id
-              description: unique id of the order
-              tests:
+    tables:
+      - name: sales
+        identifier: raw_gz_sales_copy
+        description: sales data for greenweez app
+        config:
+          loaded_at_field: "CAST(date_date AS TIMESTAMP)"
+          freshness:
+            warn_after: {count: 90, period: day}
+        columns:
+          - name: orders_id
+            description: id of the order
+            tests:
                 - unique:
                     arguments:
                       column_name: "orders_id || '-' || pdt_id"
                 - not_null 
-        - name: product        
-          identifier: raw_gz_products_copy
-          description: products data for greenweez app 
-          columns:
-             - name: products_id
-               description: unique id of the products 
-               tests:
-                  - unique
-                  - not_null
-        - name: ship
-          identifier: raw_gz_ship_copy
-          description: ship details for gwz app
-          columns:
-            - name: orders_id
-              description: unique id of the products
-              tests:
-                  - unique
-                  - not_null 
-                 
+          - name: date_date
+            description: date of purchase
+
+      - name: product
+        identifier: raw_gz_products_copy
+        description: products data for greenweez app
+        columns:
+          - name: products_id
+            description: unique id of the products
+            data_tests:
+              - unique
+              - not_null
+
+      - name: ship
+        identifier: raw_gz_ship_copy
+        description: ship details for gwz app
+        columns:
+          - name: orders_id
+            description: unique id of the order
+            data_tests:
+              - unique
+              - not_null
