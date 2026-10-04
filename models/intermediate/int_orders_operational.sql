@@ -1,6 +1,12 @@
 select 
 s.order_id
 ,m.date_date
+,s.shipping_fee
+,s.ship_cost
+,s.log_cost
+,m.revenue as revenue
+,m.satin_alma_maliyeti as sam
+,m.quantity as qty
 ,m.marj+s.shipping_fee-s.log_cost-s.ship_cost as operasyonel_marj
 from {{ref("int_orders_margin")}} as m
 left join {{ref("stg_raw__ship")}} as s
