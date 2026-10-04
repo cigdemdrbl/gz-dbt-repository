@@ -25,3 +25,13 @@ sources:
                tests:
                   - unique
                   - not_null
+        - name: ship
+          identifier: raw_gz_ship_copy
+          description: ship details for gwz app
+          columns:
+            - name: orders_id
+              description: unique id of the products
+              tests:
+                  - unique
+                  - not_null 
+                 
