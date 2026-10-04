@@ -12,7 +12,7 @@ renamed as (
         orders_id as order_id,
         shipping_fee,
         logcost as log_cost,
-        ship_cost
+        cast(ship_cost as float64) as ship_cost
 
     from source
 
