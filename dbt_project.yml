@@ -38,3 +38,7 @@ models:
   dbt_project:
     staging:
       +materialized: table
+    intermediate:
+      +materialized: table 
+    mart:
+      +materialized: table
